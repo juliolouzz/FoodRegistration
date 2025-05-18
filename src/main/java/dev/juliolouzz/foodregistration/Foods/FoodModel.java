@@ -1,6 +1,8 @@
-package dev.juliolouzz.foodregistration;
+package dev.juliolouzz.foodregistration.Foods;
 
+import dev.juliolouzz.foodregistration.Meals.MealsModel;
 import jakarta.persistence.*;
+
 
 // transform a class into an entity of DB
 @Entity
@@ -14,6 +16,11 @@ public class FoodModel {
     private String description;
     private int kcal;
     private int quantity;
+
+    //Many foods(ingredients) make just one meal
+    @ManyToOne
+    @JoinColumn(name = "meals_id") //Foreign Key
+    private MealsModel meals;
 
     public FoodModel() {
     }

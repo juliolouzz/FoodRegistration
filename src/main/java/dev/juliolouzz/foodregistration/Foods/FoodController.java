@@ -1,4 +1,4 @@
-package dev.juliolouzz.foodregistration;
+package dev.juliolouzz.foodregistration.Foods;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
