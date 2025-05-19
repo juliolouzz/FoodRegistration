@@ -2,11 +2,17 @@ package dev.juliolouzz.foodregistration.Meals;
 
 import dev.juliolouzz.foodregistration.Foods.FoodModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_meals")
+@NoArgsConstructor // Comes from Lombok, Handle empty Constructor
+@AllArgsConstructor // Comes from Lombok, Add Constructor with all arguments
+@Data // Comes from Lombok, Creates  all getters and setters
 public class MealsModel {
 
     @Id

@@ -2,11 +2,17 @@ package dev.juliolouzz.foodregistration.Foods;
 
 import dev.juliolouzz.foodregistration.Meals.MealsModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 // transform a class into an entity of DB
 @Entity
 @Table(name = "tb_registration")
+@NoArgsConstructor // Comes from Lombok, Handle empty Constructor
+@AllArgsConstructor // Comes from Lombok, Add Constructor with all arguments
+@Data // Comes from Lombok, Creates  all getters and setters
 public class FoodModel {
 
     @Id // says that foodId that is not on the constructors, is an ID on the database
@@ -22,45 +28,4 @@ public class FoodModel {
     @JoinColumn(name = "meals_id") //Foreign Key
     private MealsModel meals;
 
-    public FoodModel() {
-    }
-
-    public FoodModel(String name, String description, int kcal, int quantity) {
-        this.name = name;
-        this.description = description;
-        this.kcal = kcal;
-        this.quantity = quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getKcal() {
-        return kcal;
-    }
-
-    public void setKcal(int kcal) {
-        this.kcal = kcal;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }
