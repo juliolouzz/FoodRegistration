@@ -18,7 +18,10 @@ public class FoodModel {
     @Id // says that foodId that is not on the constructors, is an ID on the database
     @GeneratedValue(strategy = GenerationType.IDENTITY) // says how this ID will be generated
     private Long foodId;
+
+    @Column(unique = true)
     private String name;
+
     private String description;
     private int kcal;
     private int quantity;
