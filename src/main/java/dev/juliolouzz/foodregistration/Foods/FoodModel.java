@@ -22,9 +22,17 @@ public class FoodModel {
     @Column(unique = true)
     private String name;
 
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "calories")
     private int kcal;
+
+    @Column(name = "quantity")
     private int quantity;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     //Many foods(ingredients) make just one meal
     @ManyToOne
