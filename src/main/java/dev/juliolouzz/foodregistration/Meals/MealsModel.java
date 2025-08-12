@@ -1,5 +1,6 @@
 package dev.juliolouzz.foodregistration.Meals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.juliolouzz.foodregistration.Foods.FoodModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @Table(name = "tb_meals")
 @NoArgsConstructor // Comes from Lombok, Handle empty Constructor
 @AllArgsConstructor // Comes from Lombok, Add Constructor with all arguments
-@Data // Comes from Lombok, Creates  all getters and setters
+@Data // Comes from Lombok, Creates all getters and setters
 public class MealsModel {
 
     @Id
@@ -22,11 +23,9 @@ public class MealsModel {
     @Column(unique = true)
     private String name;
 
-    private String description;
-    private int kcal;
-
     //One Meal is made of Many foods(ingredients)
     @OneToMany(mappedBy = "meals") // mapped on the @ManyToOne on the other table with name meals on the other table
+    @JsonIgnore
     private List<FoodModel> food;
 
 

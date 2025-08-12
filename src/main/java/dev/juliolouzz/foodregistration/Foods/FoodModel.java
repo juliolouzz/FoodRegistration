@@ -26,10 +26,10 @@ public class FoodModel {
     private String description;
 
     @Column(name = "calories")
-    private int kcal;
+    private Integer kcal;
 
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "img_url")
     private String imgUrl;
