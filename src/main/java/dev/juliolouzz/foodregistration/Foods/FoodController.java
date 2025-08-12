@@ -32,9 +32,9 @@ public class FoodController {
     }
 
     // show food by id(READ)
-    @GetMapping("/showByID")
-    public String showFoodByID() {
-        return "Food By ID";
+    @GetMapping("/list/{id}")
+    public FoodModel listFoodById(@PathVariable Long id) {
+        return foodService.getFoodById(id);
     }
 
     // alter data of food(UPDATE)

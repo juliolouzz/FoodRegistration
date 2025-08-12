@@ -3,6 +3,7 @@ package dev.juliolouzz.foodregistration.Foods;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FoodService {
@@ -16,5 +17,11 @@ public class FoodService {
     // List all Foods
     public List<FoodModel> listFoods() {
         return foodRepository.findAll();
+    }
+
+    //List all foods by ID
+    public FoodModel getFoodById(Long id) {
+        Optional<FoodModel> foodById = foodRepository.findById(id);
+        return foodById.orElse(null);
     }
 }
