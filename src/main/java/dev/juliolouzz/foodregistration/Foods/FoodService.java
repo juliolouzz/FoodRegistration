@@ -29,4 +29,12 @@ public class FoodService {
     public FoodModel createFood(FoodModel foodModel) {
         return foodRepository.save(foodModel);
     }
+
+    //delete food by ID
+    public void deleteFoodById(Long id) {
+        foodRepository.deleteById(id);
+    }
+
+    //alter-update food by ID
+
 }

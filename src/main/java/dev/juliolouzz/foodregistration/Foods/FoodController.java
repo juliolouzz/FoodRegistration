@@ -44,8 +44,8 @@ public class FoodController {
     }
 
     // delete food(DELETE)
-    @DeleteMapping("/deleteID")
-    public String deleteFoodByID() {
-        return "delete Food By ID";
+    @DeleteMapping("/delete/{id}")
+    public void deleteFoodById(@PathVariable Long id) {
+        foodService.deleteFoodById(id);
     }
 }
