@@ -36,5 +36,11 @@ public class FoodService {
     }
 
     //alter-update food by ID
-
+    public FoodModel modifyFoodById(Long id, FoodModel foodUpdated) {
+        if (foodRepository.existsById(id)) {
+            foodUpdated.setFoodId(id);
+            return foodRepository.save(foodUpdated);
+        }
+        return null;
+    }
 }

@@ -38,9 +38,9 @@ public class FoodController {
     }
 
     // alter data of food(UPDATE)
-    @PutMapping("/modifyID")
-    public String modifyFoodByID() {
-        return "modify Food By ID";
+    @PutMapping("/modify/{id}")
+    public FoodModel modifyFoodByID(@PathVariable Long id, @RequestBody FoodModel foodUpdated) {
+        return foodService.modifyFoodById(id, foodUpdated);
     }
 
     // delete food(DELETE)
