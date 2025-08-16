@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_registration")
 @NoArgsConstructor // Comes from Lombok, Handle empty Constructor
 @AllArgsConstructor // Comes from Lombok, Add Constructor with all arguments
-@Data // Comes from Lombok, Creates  all getters and setters
+@Data // Comes from Lombok, Creates all getters and setters
 public class FoodModel {
 
-    @Id // says that foodId that is not on the constructors, is an ID on the database
+    @Id // says that foodId that is not on the constructors is an ID on the database
     @GeneratedValue(strategy = GenerationType.IDENTITY) // says how this ID will be generated
     private Long foodId;
 

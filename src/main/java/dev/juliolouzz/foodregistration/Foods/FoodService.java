@@ -24,4 +24,9 @@ public class FoodService {
         Optional<FoodModel> foodById = foodRepository.findById(id);
         return foodById.orElse(null);
     }
+
+    // create new food
+    public FoodModel createFood(FoodModel foodModel) {
+        return foodRepository.save(foodModel);
+    }
 }

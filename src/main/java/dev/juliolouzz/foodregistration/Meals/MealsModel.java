@@ -23,6 +23,9 @@ public class MealsModel {
     @Column(unique = true)
     private String name;
 
+    private String description;
+    private int kcal;
+
     //One Meal is made of Many foods(ingredients)
     @OneToMany(mappedBy = "meals") // mapped on the @ManyToOne on the other table with name meals on the other table
     @JsonIgnore
