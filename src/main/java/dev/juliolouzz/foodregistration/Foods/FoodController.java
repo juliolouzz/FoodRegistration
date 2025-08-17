@@ -27,19 +27,19 @@ public class FoodController {
 
     // show all foods(READ)
     @GetMapping("/list")
-    public List<FoodModel> listAllFoods() {
+    public List<FoodDTO> listAllFoods() {
         return foodService.listFoods();
     }
 
     // show food by id(READ)
     @GetMapping("/list/{id}")
-    public FoodModel listFoodById(@PathVariable Long id) {
+    public FoodDTO listFoodById(@PathVariable Long id) {
         return foodService.getFoodById(id);
     }
 
     // alter data of food(UPDATE)
     @PutMapping("/modify/{id}")
-    public FoodModel modifyFoodByID(@PathVariable Long id, @RequestBody FoodModel foodUpdated) {
+    public FoodDTO modifyFoodByID(@PathVariable Long id, @RequestBody FoodDTO foodUpdated) {
         return foodService.modifyFoodById(id, foodUpdated);
     }
 

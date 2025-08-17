@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FoodService {
@@ -17,14 +18,17 @@ public class FoodService {
     }
 
     // List all Foods
-    public List<FoodModel> listFoods() {
-        return foodRepository.findAll();
+    public List<FoodDTO> listFoods() {
+        List<FoodModel> foodModels = foodRepository.findAll();
+        return foodModels.stream()
+                .map(foodMapper::map)
+                .collect(Collectors.toList());
     }
 
     //List all foods by ID
-    public FoodModel getFoodById(Long id) {
+    public FoodDTO getFoodById(Long id) {
         Optional<FoodModel> foodById = foodRepository.findById(id);
-        return foodById.orElse(null);
+        return foodById.map(foodMapper::map).orElse(null);
     }
 
     // create new food
@@ -40,10 +44,13 @@ public class FoodService {
     }
 
     //alter-update food by ID
-    public FoodModel modifyFoodById(Long id, FoodModel foodUpdated) {
-        if (foodRepository.existsById(id)) {
-            foodUpdated.setFoodId(id);
-            return foodRepository.save(foodUpdated);
+    public FoodDTO modifyFoodById(Long id, FoodDTO foodDTO) {
+        Optional<FoodModel> foodExist = foodRepository.findById(id);
+        if (foodExist.isPresent()) {
+            FoodModel foodAltered = foodMapper.map(foodDTO);
+            foodAltered.setFoodId(id);
+            FoodModel updatedFood = foodRepository.save(foodAltered);
+            return foodMapper.map(updatedFood);
         }
         return null;
     }
