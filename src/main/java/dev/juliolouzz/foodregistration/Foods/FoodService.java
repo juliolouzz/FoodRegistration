@@ -9,10 +9,12 @@ import java.util.Optional;
 public class FoodService {
 
     private final FoodRepository foodRepository;
-    public FoodService(FoodRepository foodRepository) {
-        this.foodRepository = foodRepository;
-    }
+    private final FoodMapper foodMapper;
 
+    public FoodService(FoodRepository foodRepository, FoodMapper foodMapper) {
+        this.foodRepository = foodRepository;
+        this.foodMapper = foodMapper;
+    }
 
     // List all Foods
     public List<FoodModel> listFoods() {
@@ -26,8 +28,10 @@ public class FoodService {
     }
 
     // create new food
-    public FoodModel createFood(FoodModel foodModel) {
-        return foodRepository.save(foodModel);
+    public FoodDTO createFood(FoodDTO foodDTO) {
+        FoodModel foodModel = foodMapper.map(foodDTO);
+        foodRepository.save(foodModel);
+        return foodMapper.map(foodModel);
     }
 
     //delete food by ID

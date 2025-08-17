@@ -21,8 +21,8 @@ public class FoodController {
 
     // add food (CREATE)
     @PostMapping("/create")
-    public FoodModel createFood(@RequestBody FoodModel foodModel) {
-        return foodService.createFood(foodModel);
+    public FoodDTO createFood(@RequestBody FoodDTO foodDTO) {
+        return foodService.createFood(foodDTO);
     }
 
     // show all foods(READ)
