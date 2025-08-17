@@ -31,6 +31,9 @@ public class FoodModel {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "food_type")
+    private String foodType;
+
     @Column(name = "img_url")
     private String imgUrl;
 
