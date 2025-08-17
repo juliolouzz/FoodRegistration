@@ -1,5 +1,7 @@
 package dev.juliolouzz.foodregistration.Foods;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,31 +23,49 @@ public class FoodController {
 
     // add food (CREATE)
     @PostMapping("/create")
-    public FoodDTO createFood(@RequestBody FoodDTO foodDTO) {
-        return foodService.createFood(foodDTO);
+    public ResponseEntity<String> createFood(@RequestBody FoodDTO foodDTO) {
+        FoodDTO newFood = foodService.createFood(foodDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Food created with id: " + newFood.getName() + " (ID): " + newFood.getId());
     }
 
     // show all foods(READ)
     @GetMapping("/list")
-    public List<FoodDTO> listAllFoods() {
-        return foodService.listFoods();
+    public ResponseEntity<List<FoodDTO>> listAllFoods() {
+        List<FoodDTO> food = foodService.listFoods();
+        return ResponseEntity.ok(food);
     }
 
     // show food by id(READ)
     @GetMapping("/list/{id}")
-    public FoodDTO listFoodById(@PathVariable Long id) {
-        return foodService.getFoodById(id);
+    public ResponseEntity<?> listFoodById(@PathVariable Long id) {
+        FoodDTO food = foodService.getFoodById(id);
+        if (food != null) {
+            return ResponseEntity.ok(food);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Food with ID " + id + " not found");
+        }
     }
 
     // alter data of food(UPDATE)
     @PutMapping("/modify/{id}")
-    public FoodDTO modifyFoodByID(@PathVariable Long id, @RequestBody FoodDTO foodUpdated) {
-        return foodService.modifyFoodById(id, foodUpdated);
+    public ResponseEntity<?> modifyFoodByID(@PathVariable Long id, @RequestBody FoodDTO foodUpdated) {
+        FoodDTO food = foodService.modifyFoodById(id, foodUpdated);
+        if (food != null) {
+            return ResponseEntity.ok(food);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Food with ID " + id + " not found");
+        }
     }
 
     // delete food(DELETE)
     @DeleteMapping("/delete/{id}")
-    public void deleteFoodById(@PathVariable Long id) {
-        foodService.deleteFoodById(id);
+    public ResponseEntity<String> deleteFoodById(@PathVariable Long id) {
+        if (foodService.getFoodById(id) != null) {
+            foodService.deleteFoodById(id);
+            return ResponseEntity.ok("Food with ID " + id + " deleted");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Food with ID " + id + " not found");
+        }
     }
 }
